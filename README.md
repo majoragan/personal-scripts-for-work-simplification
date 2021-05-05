@@ -1,1 +1,1 @@
-# personal-scripts-for-work-simplification
+Just a couple of scripts I use to simplify my work life.
