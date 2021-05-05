@@ -12,7 +12,7 @@ DECLARE @tables		TABLE (
 
 SET @counter = 1
 SET @column = 'dummy'
-SET @type = 'nvarchar(4)'
+SET @type = 'NVARCHAR(4)'
 
 INSERT INTO @tables (id, table_name)
 VALUES 
