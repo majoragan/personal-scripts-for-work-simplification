@@ -1,4 +1,4 @@
-USE DUMMY_DATABASE
+USE DM_EMEA_BIZ
 GO
 
 DECLARE @counter	INT
@@ -11,23 +11,26 @@ DECLARE @tables		TABLE (
 )
 
 SET @counter = 1
-SET @column = 'dummy'
-SET @type = 'nvarchar(4)'
+SET @column = 'overall_buy_index'
+SET @type = 'NVARCHAR(4)'
 
 INSERT INTO @tables (id, table_name)
 VALUES 
-	 (1, 'dbo.dummy_table_1')
-	,(2, 'dbo.dummy_table_2')
-	,(3, 'dbo.dummy_table_3');
+	 (1, 'MSR.DIM_Customer_Nitrogen')
+	,(2, 'MSR.DIM_Customer_Dedup')
+	,(3, 'MSR.DIM_Customer_All_Levels')
+	,(4, 'MSR.DIM_Customer')
+	,(5, 'MS.DIM_Customer_All_Levels')
+	,(6, 'MS.DIM_Customer')
+	,(7, 'SH.DIM_Customer_All_Levels')
+	,(8, 'SH.DIM_Customer');
 
 WHILE @counter <= (SELECT MAX(id) FROM @tables)
 	BEGIN TRY
-		PRINT @counter
 		SET @script = CONCAT('ALTER TABLE ', (SELECT table_name FROM @tables WHERE id = @counter), ' ADD ', @column, ' ', @type, ';')
 		--SET @script = CONCAT('ALTER TABLE ', (SELECT table_name FROM @tables WHERE id = @counter), ' DROP COLUMN ', @column, ';')
-		PRINT @script
-		--EXECUTE (@script)
-		PRINT 'DONE'
+		EXECUTE (@script)
+		RAISERROR(@script, 0, 1) WITH NOWAIT
 		SET @counter += 1;
 	END TRY
 	BEGIN CATCH
