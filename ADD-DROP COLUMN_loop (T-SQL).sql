@@ -16,9 +16,9 @@ SET @type = 'NVARCHAR(4)'
 
 INSERT INTO @tables (id, table_name)
 VALUES 
-	 (1, 'dbo.dummy_table_1')
-	,(2, 'dbo.dummy_table_2')
-	,(3, 'dbo.dummy_table_3');
+	(1, 'dbo.dummy_table_1'),
+	(2, 'dbo.dummy_table_2'),
+	(3, 'dbo.dummy_table_3');
 
 WHILE @counter <= (SELECT MAX(id) FROM @tables)
 	BEGIN TRY
@@ -30,12 +30,12 @@ WHILE @counter <= (SELECT MAX(id) FROM @tables)
 	END TRY
 	BEGIN CATCH
 		SELECT  
-			 ERROR_NUMBER()		AS ErrorNumber  
-			,ERROR_SEVERITY()	AS ErrorSeverity  
-			,ERROR_STATE()		AS ErrorState  
-			,ERROR_PROCEDURE()	AS ErrorProcedure  
-			,ERROR_LINE()		AS ErrorLine  
-			,ERROR_MESSAGE()	AS ErrorMessage;
+			ERROR_NUMBER()		AS ErrorNumber,  
+			ERROR_SEVERITY()	AS ErrorSeverity,  
+			ERROR_STATE()		AS ErrorState,  
+			ERROR_PROCEDURE()	AS ErrorProcedure,  
+			ERROR_LINE()		AS ErrorLine,  
+			ERROR_MESSAGE()		AS ErrorMessage;
 		BREAK;
 	END CATCH;
 GO
